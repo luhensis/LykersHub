@@ -1,12 +1,3 @@
---[[
-
-	Universal ESP Module by Exunys © CC0 1.0 Universal (2023 - 2024)
-	https://github.com/Exunys
-
-]]
-
---// Caching
-
 local game = game
 local assert, loadstring, select, next, type, typeof, pcall, xpcall, setmetatable, getmetatable, tick, warn = assert, loadstring, select, next, type, typeof, pcall, xpcall, setmetatable, getmetatable, tick, warn
 local mathfloor, mathabs, mathcos, mathsin, mathrad, mathdeg, mathmin, mathmax, mathclamp, mathrandom = math.floor, math.abs, math.cos, math.sin, math.rad, math.deg, math.min, math.max, math.clamp, math.random
