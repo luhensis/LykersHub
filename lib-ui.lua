@@ -934,7 +934,6 @@ do
     BreakAllLoops = false
     task.spawn(function()
         while task.wait(1) do
-            local x = readfile('fml.txt')
             if x == 'true' then
                 for Index, Value in next, Ihatethisui do
                     print(Index, Value)
