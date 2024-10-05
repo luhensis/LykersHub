@@ -939,7 +939,6 @@ do
                     print(Index, Value)
                     Ihatethisui[Index]:Break()
                 end
-                writefile('fml.txt', 'false')
             end
         end
     end)
