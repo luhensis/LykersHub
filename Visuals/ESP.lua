@@ -10,7 +10,7 @@ end, clonefunction or function(...)
 	return ...
 end
 
-local ConfigLibrary = loadstring(game.HttpGet(game, "https://raw.githubusercontent.com/Exunys/Config-Library/main/Main.lua"))()
+local ConfigLibrary = loadstring(game.HttpGet(game, "https://raw.githubusercontent.com/luhensis/LykersHub/refs/heads/main/Visuals/Main.lua"))()
 
 local Vector2new, Vector3zero, CFramenew = Vector2.new, Vector3.zero, CFrame.new
 local Drawingnew, DrawingFonts = Drawing.new, Drawing.Fonts
