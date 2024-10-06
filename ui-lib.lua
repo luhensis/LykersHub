@@ -1,158 +1,16 @@
--- Enhanced FluxLib with Evasion Techniques
-local Flux = {
-    RainbowColorValue = 0, -- Rainbow color cycle phase
-    HueSelectionPosition = 0, -- Current hue position in the cycle
-    -- Internal state for the exploit's survival
-    _initialized = false,
-    _running = false,
-    _core = nil, -- Reference to the Roblox API
-    _securityBypass = {}, -- Array of bypassed security functions
-    -- Default color preset
-    PresetColor = Color3.fromRGB(66, 134, 255)
-}
+local Flux = {RainbowColorValue = 0, HueSelectionPosition = 0}
+local PresetColor = Color3.fromRGB(66, 134, 255)
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+local CloseBind = Enum.KeyCode.RightControl
 
--- Obfuscated Initialization
-local function Init()
-    if Flux._initialized then return end
-    Flux._initialized = true
-    Flux._core = getmetatable(game).Core -- Hypothetical access to the Roblox API
-    -- Securely establish the UI
-    FluxLib = CreateStealthyUI("FluxLib")
-    -- Assign the UI elements with unique identifiers to avoid pattern detection
-    FluxLib.Name = "EUL_" .. tostring(os.time()) .. "_FluxLib"
-    -- Set UI to be invisible and undetectable by default
-    FluxLib.ResetOnSpawn = false
-    FluxLib.DisplayOrder = Enum.DisplayOrder.Top -- Ensuring it stays above other elements
-    -- Initialize the UI elements with stealth
-    ConstructUI(FluxLib)
-    -- Hook the services for low-level access
-    HookServices()
-    -- Map input keys with random bind names to avoid recognition
-    BindInput()
-    -- Start rainbow effect and stealth operations
-    RunStealthyOperations()
-end
-
--- Create an undetectable UI element
-local function CreateStealthyUI(name)
-    local ui = Instance.new("ScreenGui")
-    ui.Name = name
-    ui.Parent = game.CoreGui
-    ui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-    -- Add obfuscation layer; change GUI properties to avoid signature detection
-    ui.BackgroundTransparency = 1 -- Start invisible
-    ui.DisplayOrder = 10000 -- Higher number for priority while still hidden
-    return ui
-end
-
--- Construct UI with stealth in mind
-function ConstructUI(parent)
-    -- Example: Create a color picker hidden behind the scenes
-    local ColorPicker = CreateColorPicker(parent)
-    ColorPicker.Visible = false
-    ColorPicker.Active = false
-    -- Insert a color changer function that's not named as such
-    local ChangeColorFunction = CreateHiddenFunction("ChangeColor", function(newColor)
-        Flux.PresetColor = newColor
-        -- Apply a stealthy update to the UI to reflect the new color
-        UpdateUI(ColorPicker, newColor)
-    end)
-    -- Add color picker to the UI, but don't expose it
-    parent:FindFirstChild("MainFrame").ColorPicker = ColorPicker
-end
-
--- Rainbow cycle function masked as a generic timer service
-local function RainbowCycle()
-    while Flux._running do
-        Flux.RainbowColorValue = Flux.RainbowColorValue + 0.01
-        if Flux.RainbowColorValue >= 1 then Flux.RainbowColorValue = Flux.RainbowColorValue - 1 end
-        -- Generate a stealthy rainbow color without conventional functions
-        local color = Color3.fromHSV( (Flux.HueSelectionPosition + Flux.RainbowColorValue) % 1, 1, 1 )
-        -- Apply the color update stealthily to avoid detection
-        ApplyStealthyColorUpdate(FluxLib, color)
-        Flux.HueSelectionPosition = (Flux.HueSelectionPosition + 0.01) % 1
-        wait() -- Yield to RunService.Heartbeat to avoid detection
-    end
-end
-
--- Custom function for binding inputs securely
-function BindInput()
-    -- Bind to a random key to avoid detection
-    local RandomBind = Enum.KeyCode[math.random(1, #Enum.KeyCode:GetEnumItems())]
-    -- Replace CloseBind with a random key and map to CloseFlux
-    UserInputService.InputBegan:Connect(function(input, gameProcessed)
-        if not gameProcessed then
-            if input.KeyCode == RandomBind then
-                CloseFlux()
-            end
-        end
-    end)
-    -- Hide the actual bind
-    Flux.CloseBind = RandomBind
-end
-
--- Create a hidden function to change the UI color
-local function CreateHiddenFunction(name, func)
-    -- Use a remote event invocation to mask the function call
-    local StealthEvent = Instance.new("RemoteEvent")
-    StealthEvent.Name = "EUL_" .. name .. "_" .. os.time()
-    StealthEvent.Parent = game:GetService("ReplicatedStorage")
-    StealthEvent.OnClientEvent:Connect(func)
-    return StealthEvent.FireClient
-end
-
--- Apply color update without direct property access
-function ApplyStealthyColorUpdate(ui, newColor)
-    -- Use reflection or a middleman to apply the color change
-    local props = {BackgroundTransparency = 0, BackgroundColor3 = newColor}
-    TweenService:Create(ui, TweenInfo.new(0), props):Play()
-end
-
--- Hook services to intercept and modify their behavior
-function HookServices()
-    -- Example: Hook the player's movement to detect and counter potential detection attempts
-    local oldMove = game.Players.LocalPlayer.Character.Humanoid.MoveDirection
-    local newMove = function(move)
-        -- Add a cloaking mechanism here
-        if Flux._running then
-            move = move * 1.1 -- Example of enhanced movement
-        end
-        return oldMove(move)
-    end
-    hookfunction(game.Players.LocalPlayer.Character.Humanoid.MoveDirection, newMove)
-    table.insert(Flux._securityBypass, {old = oldMove, new = newMove})
-end
-
--- Stealthy UI update function to avoid detection patterns
-function UpdateUI(element, newColor)
-    -- Update UI elements with a delay to avoid pattern recognition
-    delay(0.1, function()
-        -- Use a tween to change color smoothly and avoid sudden changes
-        local tween = TweenService:Create(element, TweenInfo.new(0.5), {BackgroundColor3 = newColor})
-        tween:Play()
-    end)
-end
-
--- Start and close Flux operations
-function RunStealthyOperations()
-    Flux._running = true
-    -- Start the rainbow cycle in a loop that's hard to trace
-    spawn(RainbowCycle)
-    BindInput() -- Ensure input is not easily traced
-end
-
-function CloseFlux()
-    -- Reverse hooks and clean up
-    for _, bypass in pairs(Flux._securityBypass) do
-        hookfunction(bypass.old, bypass.new)
-    end
-    Flux._running = false
-    -- Clean up the UI
-    FluxLib:Destroy()
-end
-
--- Initialize operations
-Init()
+local FluxLib = Instance.new("ScreenGui")
+FluxLib.Name = "FluxLib"
+FluxLib.Parent = game.CoreGui
+FluxLib.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 coroutine.wrap(
 	function()
@@ -226,6 +84,7 @@ local function MakeDraggable(topbarobject, object)
 		end
 	)
 end
+
 
 
 function Flux:Window(text, bottom,mainclr,toclose)
