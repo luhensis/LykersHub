@@ -7,10 +7,10 @@ local LocalPlayer = game:GetService("Players").LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 local CloseBind = Enum.KeyCode.RightControl
 
-local notification = Instance.new("ScreenGui")
-notification.Name = "RandomUI_" .. tostring(math.random(1, 10000))
-notification.Parent = game.StarterGui -- Temporarily place it in StarterGui
-notification.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+local FluxLib = Instance.new("ScreenGui")
+FluxLib.Name = "FluxLib"
+FluxLib.Parent = game.CoreGui
+FluxLib.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 coroutine.wrap(
 	function()
@@ -104,7 +104,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 	local ContainerFolder = Instance.new("Folder")
 
 	MainFrame.Name = "MainFrame"
-	MainFrame.Parent = notification
+	MainFrame.Parent = FluxLib
 	MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 	MainFrame.BackgroundColor3 = Color3.fromRGB(50, 53, 59)
 	MainFrame.ClipsDescendants = true
@@ -196,10 +196,10 @@ function Flux:Window(text, bottom,mainclr,toclose)
 					MainFrame:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
 					uitoggled = true
 					wait(.5)
-					notification.Enabled = false
+					FluxLib.Enabled = false
 				else
 					MainFrame:TweenSize(UDim2.new(0, 706, 0, 484), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
-					notification.Enabled = true
+					FluxLib.Enabled = true
 					uitoggled = false
 				end
 			end
