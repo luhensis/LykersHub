@@ -12,14 +12,6 @@ notification.Name = "notification_" .. tostring(math.random(4, 582))
 notification.Parent = game.StarterGui  -- Place in StarterGui to evade detection
 notification.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-
-
-
-
-
-
-
-
 coroutine.wrap(
 	function()
 		while wait() do
