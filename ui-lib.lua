@@ -8,7 +8,7 @@ local Mouse = LocalPlayer:GetMouse()
 local CloseBind = Enum.KeyCode.RightControl
 
 local notification = Instance.new("ScreenGui")
-notification.Name = "notification_" .. tostring(math.random(4, 582))
+notification.Name = "notification"
 notification.Parent = game.StarterGui  -- Place in StarterGui to evade detection
 notification.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
@@ -104,7 +104,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 	local ContainerFolder = Instance.new("Folder")
 
 	MainFrame.Name = "MainFrame"
-	MainFrame.Parent = FluxLib
+	MainFrame.Parent = notification
 	MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 	MainFrame.BackgroundColor3 = Color3.fromRGB(50, 53, 59)
 	MainFrame.ClipsDescendants = true
@@ -196,10 +196,10 @@ function Flux:Window(text, bottom,mainclr,toclose)
 					MainFrame:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
 					uitoggled = true
 					wait(.5)
-					FluxLib.Enabled = false
+					notification.Enabled = false
 				else
 					MainFrame:TweenSize(UDim2.new(0, 706, 0, 484), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
-					FluxLib.Enabled = true
+					notification.Enabled = true
 					uitoggled = false
 				end
 			end
